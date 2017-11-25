@@ -7,11 +7,12 @@ extends AnimatedSprite
 var size
 var direction = Vector2(0.0, 1.0)
 var scroll_speed
-
+var random_int
 
 func init(position):
 	set_pos(position)
-
+	random_int = round(rand_range(0.0,6.4))
+	set_frame(random_int)
 func _ready():
 
     #size = get_texture().get_size()
