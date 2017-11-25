@@ -10,8 +10,7 @@ const side_speed = 100
 var scroll_speed
 var last_trail_segment
 var grungyFilthCounter = 0
-var mySprite = preload("res://Scenes/trail_segment.tscn").instance() 
-
+var mySprite
 func _ready():
 
     size = get_texture().get_size()
@@ -36,12 +35,14 @@ func _process(delta):
 		if(direction.x > 0):
 			direction.x -= turnspeed
 	
-	if(grungyFilthCounter >= 10):
+	if(grungyFilthCounter >= 7):
 		grungyFilthCounter = 0
-		get_parent().add_child(mySprite)
 		mySprite = preload("res://Scenes/trail_segment.tscn").instance() 
+		mySprite.init(pos)
+		get_parent().add_child(mySprite)
+		
 	else:
 		grungyFilthCounter += 1
-	scroll_speed = sqrt(100.0*100.0 - (direction.x * 100.0) * (direction.x * 100.0))
+	scroll_speed = sqrt(100.0*100.0 - (abs(direction.x) * 100.0 - 10) * (abs(direction.x) * 100.0 - 10))
 	get_node("/root/Game").scroll_speed = scroll_speed
 	
