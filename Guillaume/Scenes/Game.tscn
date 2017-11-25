@@ -1,8 +1,37 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/cave_tiles.tres" type="TileSet" id=2]
 [ext_resource path="res://Scripts/sides.gd" type="Script" id=3]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Node2D
+
+# Personnal path
+var path = []
+
+func _draw():
+	var col = Color(0,0,0,1)
+	
+	for i in range(path.size()):
+		if i > 0:
+			draw_line(path[i-1], path[i], col)
+"
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "extends Node2D
+
+# Personnal path
+var path = []
+
+func _draw():
+	var col = Color(0,0,0,1)
+	
+	for i in range(path.size()):
+		if i > 0:
+			draw_line(path[i-1], path[i], col)"
 
 [node name="Game" type="Node"]
 
@@ -32,14 +61,10 @@ script/script = ExtResource( 3 )
 
 [node name="RightDraw" type="Node2D" parent="Sides"]
 
-[node name="RightSide" type="Path2D" parent="Sides/RightDraw"]
-
-curve = null
+script/script = SubResource( 1 )
 
 [node name="LeftDraw" type="Node2D" parent="Sides"]
 
-[node name="LeftSide" type="Path2D" parent="Sides/LeftDraw"]
-
-curve = null
+script/script = SubResource( 2 )
 
 
