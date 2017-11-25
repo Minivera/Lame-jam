@@ -1,0 +1,22 @@
+Assuming some sort of global timer:
+
+When user gets sun{
+	timeSinceLastPetal = currentTime;
+	petals++;
+}
+
+Then, somewhere in main loop
+
+if (timeSinceLastPetal + 2 seconds < currentTime && petals >= 10){
+	petals -= 10;
+	spawn bud; 
+	use normal sprite
+} // Gives user 2 seconds to see the fully blooming flower, before it loses its petals and drops a seed.
+
+else if (timeSinceLastPetal + 2 seconds >= currentTime){
+	use flashing sprite instead of normal sprite;
+}
+
+else{
+	use normal sprite;
+}

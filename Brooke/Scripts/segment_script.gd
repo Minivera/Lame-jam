@@ -9,7 +9,8 @@ var direction = Vector2(0.0, 1.0)
 var scroll_speed
 
 
- 
+func init(position):
+	set_pos(position)
 
 func _ready():
 

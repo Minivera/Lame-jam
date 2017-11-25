@@ -3,9 +3,9 @@
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/cave_textures.tres" type="TileSet" id=2]
 [ext_resource path="res://Scripts/sides.gd" type="Script" id=3]
-[ext_resource path="res://Sprites/FlowerFlash10.png" type="Texture" id=4]
-[ext_resource path="res://Scripts/player_script.gd" type="Script" id=5]
-[ext_resource path="res://Scenes/trail_segment.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/trail_segment.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Sprites/FlowerFlash10.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/player_script.gd" type="Script" id=6]
 [ext_resource path="res://Sprites/FlowerBase0.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/FlowerBase1.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/FlowerBase2.png" type="Texture" id=9]
@@ -53,13 +53,13 @@ tile_data = IntArray(  )
 
 script/script = ExtResource( 3 )
 
+[node name="trail_segment" parent="." instance=ExtResource( 4 )]
+
 [node name="Sprite" type="Sprite" parent="."]
 
 transform/pos = Vector2( 499, 301 )
-texture = ExtResource( 4 )
-script/script = ExtResource( 5 )
-
-[node name="trail_segment" parent="." instance=ExtResource( 6 )]
+texture = ExtResource( 5 )
+script/script = ExtResource( 6 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 
