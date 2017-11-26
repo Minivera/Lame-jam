@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=1]
+[gd_scene load_steps=21 format=1]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/cave_textures.tres" type="TileSet" id=2]
@@ -16,6 +16,52 @@
 [ext_resource path="res://Sprites/FlowerBase9.png" type="Texture" id=14]
 [ext_resource path="res://Sprites/FlowerBase10.png" type="Texture" id=15]
 [ext_resource path="res://Scripts/player_script.gd" type="Script" id=16]
+
+[sub_resource type="GDScript" id=3]
+
+script/source = "# Left Side
+
+extends Node2D
+
+# Personnal path
+var path = []
+
+func _draw():
+	var col = []
+	col.append(Color(0,0,0,1))
+	
+	for i in range(path.size()):
+		if i > 0:
+			var points = []
+			points.append(Vector2(0, path[i].y))
+			points.append(Vector2(path[i].x, path[i].y))
+			points.append(Vector2(path[i-1].x, path[i-1].y))
+			points.append(Vector2(0, path[i-1].y))
+			draw_polygon(points, col)"
+
+[sub_resource type="GDScript" id=4]
+
+script/source = "# Left Side
+
+extends Node2D
+
+# Personnal path
+var path = []
+
+func _draw():
+	var col = []
+	col.append(Color(0,0,0,1))
+	var viewport = get_viewport().get_rect().size
+	var viewWidth = viewport[0]
+	
+	for i in range(path.size()):
+		if i > 0:
+			var points = []
+			points.append(Vector2(viewWidth, path[i].y))
+			points.append(Vector2(path[i].x, path[i].y))
+			points.append(Vector2(path[i-1].x, path[i-1].y))
+			points.append(Vector2(viewWidth, path[i-1].y))
+			draw_polygon(points, col)"
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -60,6 +106,14 @@ tile_data = IntArray(  )
 [node name="Sides" type="Node2D" parent="."]
 
 script/script = ExtResource( 3 )
+
+[node name="RightDraw" type="Node2D" parent="Sides"]
+
+script/script = SubResource( 3 )
+
+[node name="LeftDraw" type="Node2D" parent="Sides"]
+
+script/script = SubResource( 4 )
 
 [node name="CanvasLayer 2" parent="." instance=ExtResource( 4 )]
 

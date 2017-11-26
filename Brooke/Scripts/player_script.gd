@@ -80,8 +80,8 @@ func _process(delta):
 		segment_drop_ready = false
 		speed_adjust_ready = false
 		get_node("/root/Game").scroll_speed = 0
-		if(sunframe >0 and decay_ready):
-			sunframe -= 1
+		if(sun_frame >0 and decay_ready):
+			sun_frame -= 1
 			grungyFilthTimer.start
 			decay_ready = false
 		else:
