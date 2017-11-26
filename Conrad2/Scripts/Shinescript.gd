@@ -44,6 +44,7 @@ func _process(delta):
 	#rect = get_node("/root/Game/CanvasLayer/Player").get_item_rect()
 	if( pos.x > playerPos.x - 30 and pos.x < playerPos.x + 30 and pos.y > playerPos.y - 30 and pos.y < playerPos.y + 30):
 		get_node("/root/Game").shine_meter += 1#
+		get_node("/root/Game").playShineSound = true
 		self.hide()
 		self.queue_free()
 
