@@ -3,28 +3,36 @@
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/cave_textures.tres" type="TileSet" id=2]
 [ext_resource path="res://Scripts/sides.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/trail_segment.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Sprites/FlowerFlash10.png" type="Texture" id=5]
-[ext_resource path="res://Scripts/player_script.gd" type="Script" id=6]
-[ext_resource path="res://Sprites/FlowerBase0.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/FlowerBase1.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/FlowerBase2.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/FlowerBase3.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/FlowerBase4.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/FlowerBase5.png" type="Texture" id=12]
-[ext_resource path="res://Sprites/FlowerBase6.png" type="Texture" id=13]
-[ext_resource path="res://Sprites/FlowerBase7.png" type="Texture" id=14]
-[ext_resource path="res://Sprites/FlowerBase8.png" type="Texture" id=15]
-[ext_resource path="res://Sprites/FlowerBase9.png" type="Texture" id=16]
-[ext_resource path="res://Sprites/FlowerBase10.png" type="Texture" id=17]
+[ext_resource path="res://Scenes/trail_segments.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Sprites/FlowerBase0.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/FlowerBase1.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/FlowerBase2.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/FlowerBase3.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/FlowerBase4.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/FlowerBase5.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/FlowerBase6.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/FlowerBase7.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/FlowerBase8.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/FlowerBase9.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/FlowerBase10.png" type="Texture" id=15]
+[ext_resource path="res://Scripts/player_script.gd" type="Script" id=16]
 
 [sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
-"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ) ],
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 15 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "default",
+"speed": 0.0
 } ]
 
 [node name="Game" type="Node"]
@@ -53,18 +61,26 @@ tile_data = IntArray(  )
 
 script/script = ExtResource( 3 )
 
-[node name="trail_segment" parent="." instance=ExtResource( 4 )]
-
-[node name="Sprite" type="Sprite" parent="."]
-
-transform/pos = Vector2( 499, 301 )
-texture = ExtResource( 5 )
-script/script = ExtResource( 6 )
+[node name="CanvasLayer 2" parent="." instance=ExtResource( 4 )]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 
 visibility/visible = false
 frames = SubResource( 1 )
 animation = "default"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="Player" type="AnimatedSprite" parent="CanvasLayer"]
+
+transform/pos = Vector2( 496.399, 312.465 )
+frames = SubResource( 2 )
+animation = "default"
+script/script = ExtResource( 16 )
 
 

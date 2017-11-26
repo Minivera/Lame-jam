@@ -1,4 +1,4 @@
-extends Sprite
+extends AnimatedSprite
 
 
 # class member variables go here, for example:
@@ -15,9 +15,9 @@ var input_timer = null
 var segment_timer = null
 var speed_adjust_ready = true
 var segment_drop_ready = true
-
+var pos = get_pos()
 func _ready():
-	size = get_texture().get_size()
+	#size = get_texture().get_size()
 	set_process(true)
 	input_timer = Timer.new()
 	input_timer.set_wait_time( 0.05 )
@@ -27,6 +27,7 @@ func _ready():
 	segment_timer.set_wait_time( 0.1 )
 	segment_timer.connect("timeout", self, "_on_segment_timer_timeout")
 	add_child(segment_timer)
+
 	
 func _on_input_timer_timeout():
 	speed_adjust_ready = true
@@ -35,7 +36,7 @@ func _on_segment_timer_timeout():
 	segment_drop_ready = true
 
 func _process(delta):
-	var pos = get_pos()
+
 	pos += direction * side_speed  * delta
 	set_pos(pos)
 	
@@ -58,8 +59,7 @@ func _process(delta):
 		input_timer.start()
 	
 	if(segment_drop_ready):
-		mySprite = preload("res://Scenes/trail_segment.tscn").instance() 
-		mySprite.init(pos)
+		mySprite = preload("res://Scenes/trail_segments.tscn").instance() 
 		get_parent().add_child(mySprite)
 		segment_drop_ready = false
 		segment_timer.start()

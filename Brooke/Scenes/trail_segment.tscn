@@ -8,7 +8,7 @@
 [ext_resource path="res://Sprites/VineBall6.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/segment_script.gd" type="Script" id=7]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
@@ -19,9 +19,23 @@ animations = [ {
 
 [node name="trail_segment" type="AnimatedSprite"]
 
+visibility/behind_parent = true
 transform/pos = Vector2( 500, 330 )
-frames = SubResource( 2 )
+frames = SubResource( 1 )
 animation = "default"
 script/script = ExtResource( 7 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+scroll/offset = Vector2( 0, 0 )
+scroll/base_offset = Vector2( 0, 0 )
+scroll/base_scale = Vector2( 1, 1 )
+scroll/limit_begin = Vector2( 0, 0 )
+scroll/limit_end = Vector2( 0, 0 )
+scroll/ignore_camera_zoom = false
 
 
