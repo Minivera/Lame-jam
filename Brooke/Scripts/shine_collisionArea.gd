@@ -11,5 +11,5 @@ func _ready():
 	set_process(true)
 	
 func _process(delta):
-  if (self.is_colliding()):
-        print (self.get_collider().get_name())
+	if (self.is_colliding()):
+		print(self.get_collider().get_name())

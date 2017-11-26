@@ -83,7 +83,8 @@ func _process(delta):
 			grungyFilthTimer.start
 			decay_ready = false
 		else:
-			pass
+			self.hide()
+			self.queue_free()
 			#delete player sprite 
 	else:
 		scroll_speed = sqrt(abs(100.0*100.0 - (abs(direction.x) * 100.0 - 10) * (abs(direction.x) * 100.0 - 10)))
