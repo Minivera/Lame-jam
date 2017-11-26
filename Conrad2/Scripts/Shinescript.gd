@@ -9,9 +9,11 @@ var scroll_speed
 
 var maxleft = -100.0
 var maxright = -100.0
-
-
-
+var rect
+var self_rect
+var playerPos
+var playerX
+var playerY
 func init(Left, Right):
 	maxleft = Left.x
 	maxright = Right.x
@@ -37,8 +39,13 @@ func _process(delta):
 	var pos = get_pos()
 	pos += direction * scroll_speed * delta
 	set_pos(pos)
-	if (false):
-		get_node("/root/Game").playShineSound = true
+	playerPos = get_node("/root/Game/CanvasLayer/Player").pos
+	#self_rect = get_item_rect()
+	#rect = get_node("/root/Game/CanvasLayer/Player").get_item_rect()
+	if( pos.x > playerPos.x - 30 and pos.x < playerPos.x + 30 and pos.y > playerPos.y - 30 and pos.y < playerPos.y + 30):
+		get_node("/root/Game").shine_meter += 1#
+		self.hide()
+		self.queue_free()
 
 
 
