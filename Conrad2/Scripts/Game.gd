@@ -8,6 +8,7 @@ var mySprite
 var total_scroll = 0
 var LeftPath = Vector2(-100.0, 0)
 var RightPath = Vector2(-100.0, 0)
+var smacked = false
 
 
 
@@ -22,7 +23,9 @@ func _on_timer_timeout():
 	ready = true
 
 func _process(delta):
-	if (ready):
+	if (get_node("CanvasLayer/Player").dead && !smacked):
+		get_node("SamplePlayer").play("smack")
+	if (ready): # If it's time to spawn another Shine
 		mySprite = preload("res://Scenes/Shine2.tscn").instance() 
 		LeftPath = get_node("Sides").LeftPath[0]
 		RightPath = get_node("Sides").RightPath[0]

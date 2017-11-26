@@ -19,7 +19,6 @@ animations = [ {
 
 [node name="trail_segment" type="AnimatedSprite"]
 
-editor/display_folded = true
 visibility/behind_parent = true
 transform/pos = Vector2( 500, 330 )
 frames = SubResource( 1 )

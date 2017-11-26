@@ -21,6 +21,8 @@ const MIN_DISTANCE = 400
 var LeftPath = []
 var RightPath = []
 
+#variable for storing the delta outside the process
+var the_delta
 
 
 # Current direction the walls are going
@@ -71,9 +73,13 @@ func _draw():
 
 func _process(delta):
 	# TODO: REMOVE THAT!
-	get_node("/root/Game").total_scroll += delta
+	#this line, which dictates how much is added to the total scroll, basically dictates the speed of the walls
+	#so now I have to a) sync this with the scroll speed and ideally b) frame unlocked. 
+	#actually total_scroll is not needed the change will occur when adding totat_scroll.
+	get_node("/root/Game").total_scroll += delta 
+	the_delta = delta
 	if (currentLean["left"] >= abs(direction["left"]) or currentLean["right"] >= abs(direction["right"])):
-		print("rcalcul")
+		#print("rcalcul")
 		# Check if we are still going to the same side
 		if (timesSameSide == TIME_SAME_SIDE) :
 			timesSameSide = 0
@@ -99,8 +105,8 @@ func generate_middle_dot():
 	currentLean["right"] += abs(direction["right"] * SIDE_ACCELERATION)
 	var leftPos = max(LeftPath[0].x + direction["left"] * SIDE_ACCELERATION, rand_range(maxLeft, maxLeft - 40))
 	var rightPos = min(RightPath[0].x + direction["right"] * SIDE_ACCELERATION, rand_range(maxRight, maxRight - 40))
-	print(rightPos - leftPos)
-	print(MIN_DISTANCE)
+	#print(rightPos - leftPos)
+	#print(MIN_DISTANCE)
 	if (rightPos - leftPos <= MIN_DISTANCE):
 		leftPos = max(LeftPath[0].x + ((-direction["left"]) * SIDE_ACCELERATION), maxLeft)
 		rightPos = min(RightPath[0].x + ((-direction["right"]) * SIDE_ACCELERATION), maxRight)
@@ -108,10 +114,12 @@ func generate_middle_dot():
 	var rightdot = Vector2(rightPos, 0)
 	# Add the dot to the array
 	# Go through all dots and add the total scroll to their position
+	#This currently adds total scroll which does't make a whole ton of sense. It should just add how much the plant has moved
+	#So the plant has moved by I think scroll_speed * delta? like each frame?
 	for i in range(LeftPath.size()):
 		if i > 0:
-			LeftPath[i] = Vector2(LeftPath[i].x, LeftPath[i].y + total_scroll)
-			RightPath[i] = Vector2(RightPath[i].x, RightPath[i].y + total_scroll)
+			LeftPath[i] = Vector2(LeftPath[i].x, LeftPath[i].y + get_node("/root/Game").scroll_speed * the_delta) #+ total_scroll)
+			RightPath[i] = Vector2(RightPath[i].x, RightPath[i].y+ get_node("/root/Game").scroll_speed * the_delta) #+ total_scroll)
 	LeftPath.push_front(leftdot)
 	RightPath.push_front(rightdot)
 	update()
