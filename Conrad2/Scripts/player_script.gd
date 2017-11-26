@@ -94,16 +94,16 @@ func _process(delta):
 func detect_wall_collision() :
 	var playerRect
 	if (sun_frame > 5) :
-		playerRect = Rect2(Vector2(pos.x - 32, pos.y - 32), Vector2(32, 32))
+		playerRect = Rect2(Vector2(pos.x, pos.y), Vector2(64, 64))
 	else :
-		playerRect = Rect2(Vector2(pos.x + 48, pos.y + 48), Vector2(24, 24))
+		playerRect = Rect2(Vector2(pos.x + 24, pos.y + 24), Vector2(24, 24))
 	var leftWall = get_node("/root/Game/Sides").LeftPath
 	var rightWall = get_node("/root/Game/Sides").RightPath
 	var viewport = get_viewport().get_rect().size
 	var viewWidth = viewport[0]
 	for i in range (leftWall.size()):
 		if i > 0:
-			var rect = Rect2(0, leftWall[i].y, leftWall[i].x, 2)
+			var rect = Rect2(0, leftWall[i].y, leftWall[i].x + 32, 2)
 			if (rect.intersects(playerRect)):
 				dead = true
 	for i in range (rightWall.size()):
