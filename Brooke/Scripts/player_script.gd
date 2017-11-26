@@ -20,7 +20,7 @@ func _ready():
 	size = get_texture().get_size()
 	set_process(true)
 	input_timer = Timer.new()
-	input_timer.set_wait_time( 0.00001 )
+	input_timer.set_wait_time( 0.001 )
 	input_timer.connect("timeout", self, "_on_input_timer_timeout")
 	add_child(input_timer)
 	segment_timer = Timer.new()
