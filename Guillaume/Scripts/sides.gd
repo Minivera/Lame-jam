@@ -5,10 +5,13 @@ const MAX_MIDDLE_SPACE = 0.80
 const MIN_MIDDLE_SPACE = 0.50
 
 # Constants that defines how far from the last point the next point can be, in percentages.
-const MAX_SIDE_LEAN = 0.005
+const MAX_SIDE_LEAN = 15
+
+# Acceleration when moving to one side
+const SIDE_ACCELERATION = 0.20
 
 # Constants that defines how close the two dots can be, in pixels.
-const MIN_DISTANCE = 200
+const MIN_DISTANCE = 400
 
 # Saves all the dots for both sides in an array of array of vectors for the dots.
 var LeftPath = []
@@ -18,7 +21,10 @@ var RightPath = []
 var accumulation = 0
 
 # Current direction the walls are going
-var direction = 0
+var direction = {
+	"left" : 0,
+	"right" : 0
+}
 
 var maxLeft = 0;
 var maxRight = 0;
@@ -43,7 +49,8 @@ func _ready():
 	get_node("LeftDraw").path = RightPath;
 	get_node("LeftDraw").update()
 	# Setup variables
-	direction = rand_range(-MAX_SIDE_LEAN, MAX_SIDE_LEAN)
+	direction["left"] = rand_range(0 - MAX_SIDE_LEAN, MAX_SIDE_LEAN)
+	direction["right"] = rand_range(0 - MAX_SIDE_LEAN, MAX_SIDE_LEAN)
 	maxLeft = 0 + viewWidth * (1 - MAX_MIDDLE_SPACE)
 	maxRight = viewWidth - viewWidth * (1 - MAX_MIDDLE_SPACE)
 
@@ -62,21 +69,23 @@ func _process(delta):
 	if (accumulation >= speed):
 		accumulation = 0
 		# Get a random number for the distance between spot and middle (Minus means to the left)
-		direction = rand_range(0 - MAX_SIDE_LEAN, MAX_SIDE_LEAN)
-		generate_middle_dot()
+		direction["left"] = rand_range(0 - MAX_SIDE_LEAN, MAX_SIDE_LEAN)
+		direction["right"] = rand_range(0 - MAX_SIDE_LEAN, MAX_SIDE_LEAN)
+		generate_middle_dot(delta)
 	else:
-		generate_middle_dot()
+		generate_middle_dot(delta)
 
-func generate_middle_dot():
+func generate_middle_dot(delta):
 	var viewport = get_viewport().get_rect().size
 	var total_scroll = get_node("/root/Game").total_scroll
 	
-	var leftPos = max(LeftPath[0].x + (LeftPath[0].x * direction), maxLeft)
-	var rightPos = min(RightPath[0].x + (RightPath[0].x * direction), maxRight)
-	#print(leftPos - rightPos)
-	#if (leftPos - rightPos <= MIN_DISTANCE):
-		#rightPos += leftPos - rightPos / 2
-		#leftPos += leftPos - rightPos / 2
+	var leftPos = max(LeftPath[0].x + ((direction["left"] + delta) * SIDE_ACCELERATION), maxLeft)
+	var rightPos = min(RightPath[0].x + ((direction["right"] + delta) * SIDE_ACCELERATION), maxRight)
+	print(rightPos - leftPos)
+	print(MIN_DISTANCE)
+	if (rightPos - leftPos <= MIN_DISTANCE):
+		leftPos = max(LeftPath[0].x + ((-direction["left"] + delta) * SIDE_ACCELERATION), maxLeft)
+		rightPos = min(RightPath[0].x + ((-direction["right"] + delta) * SIDE_ACCELERATION), maxRight)
 	var leftdot = Vector2(leftPos, 0)
 	var rightdot = Vector2(rightPos, 0)
 	# Add the dot to the array

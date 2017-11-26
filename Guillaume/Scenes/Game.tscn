@@ -6,32 +6,49 @@
 
 [sub_resource type="GDScript" id=1]
 
-script/source = "extends Node2D
+script/source = "# Left Side
+
+extends Node2D
 
 # Personnal path
 var path = []
 
 func _draw():
-	var col = Color(0,0,0,1)
+	var col = []
+	col.append(Color(0,0,0,1))
 	
 	for i in range(path.size()):
 		if i > 0:
-			draw_line(path[i-1], path[i], col)
-"
+			var points = []
+			points.append(Vector2(0, path[i].y))
+			points.append(Vector2(path[i].x, path[i].y))
+			points.append(Vector2(path[i-1].x, path[i-1].y))
+			points.append(Vector2(0, path[i-1].y))
+			draw_polygon(points, col)"
 
 [sub_resource type="GDScript" id=2]
 
-script/source = "extends Node2D
+script/source = "# Left Side
+
+extends Node2D
 
 # Personnal path
 var path = []
 
 func _draw():
-	var col = Color(0,0,0,1)
+	var col = []
+	col.append(Color(0,0,0,1))
+	var viewport = get_viewport().get_rect().size
+	var viewWidth = viewport[0]
 	
 	for i in range(path.size()):
 		if i > 0:
-			draw_line(path[i-1], path[i], col)"
+			var points = []
+			points.append(Vector2(viewWidth, path[i].y))
+			points.append(Vector2(path[i].x, path[i].y))
+			points.append(Vector2(path[i-1].x, path[i-1].y))
+			points.append(Vector2(viewWidth, path[i-1].y))
+			draw_polygon(points, col)"
 
 [node name="Game" type="Node"]
 
