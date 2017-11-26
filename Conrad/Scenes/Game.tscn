@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=1]
+[gd_scene load_steps=20 format=1]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/cave_textures.tres" type="TileSet" id=2]
@@ -17,8 +17,7 @@
 [ext_resource path="res://Sprites/FlowerBase8.png" type="Texture" id=15]
 [ext_resource path="res://Sprites/FlowerBase9.png" type="Texture" id=16]
 [ext_resource path="res://Sprites/FlowerBase10.png" type="Texture" id=17]
-[ext_resource path="res://Sprites/Shine.png" type="Texture" id=18]
-[ext_resource path="res://Scripts/Shinescript.gd" type="Script" id=19]
+[ext_resource path="res://Scenes/Shine2.tscn" type="PackedScene" id=18]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -69,11 +68,7 @@ visibility/visible = false
 frames = SubResource( 1 )
 animation = "default"
 
-[node name="Shine2" type="Sprite" parent="."]
-
-transform/pos = Vector2( 392.617, 185.552 )
-texture = ExtResource( 18 )
-script/script = ExtResource( 19 )
+[node name="Shine2" parent="." instance=ExtResource( 18 )]
 
 [node name="Sprite 2" type="Sprite" parent="."]
 

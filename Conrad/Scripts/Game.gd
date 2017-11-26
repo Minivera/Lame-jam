@@ -12,7 +12,7 @@ func _ready():
 
 func _process(delta):
 	timer += round(delta)
-	if (timer % 1 == 0):
-		mySprite = preload("res://Scenes/Shine.tscn").instance() 
+	if (true):
+		mySprite = preload("res://Scenes/Shine2.tscn").instance() 
 		mySprite.init()
 		add_child(mySprite)
