@@ -3,7 +3,7 @@ extends Node
 var scroll_speed = 100
 var timer = 0
 var timeSinceShine = 0
-
+var shine_meter = 0
 var mySprite
 
 
