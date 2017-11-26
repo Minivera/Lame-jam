@@ -8,10 +8,10 @@ var mySprite
 
 
 func _ready():
-	pass
+	set_process(true)
 
 func _process(delta):
-	timer += round(delta)
+#	timer += round(delta)
 	if (true):
 		mySprite = preload("res://Scenes/Shine2.tscn").instance() 
 		mySprite.init()
