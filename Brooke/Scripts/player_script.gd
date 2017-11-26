@@ -15,6 +15,7 @@ var input_timer = null
 var segment_timer = null
 var speed_adjust_ready = true
 var segment_drop_ready = true
+var sun_frame
 var pos = get_pos()
 func _ready():
 	#size = get_texture().get_size()
@@ -39,6 +40,10 @@ func _process(delta):
 
 	pos += direction * side_speed  * delta
 	set_pos(pos)
+	sun_frame = ceil(get_node("/root/Game").shine_meter)
+	if(sun_frame > 10):
+		sun_frame = 10
+	set_frame(sun_frame)
 	
 	if(Input.is_action_pressed("turn_right") and not direction.x > 0.8 and speed_adjust_ready):
 		direction.x += turnspeed
@@ -63,7 +68,6 @@ func _process(delta):
 		get_parent().add_child(mySprite)
 		segment_drop_ready = false
 		segment_timer.start()
-	
 	
 	scroll_speed = sqrt(abs(100.0*100.0 - (abs(direction.x) * 100.0 - 10) * (abs(direction.x) * 100.0 - 10)))
 	get_node("/root/Game").scroll_speed = scroll_speed
