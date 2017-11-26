@@ -15,7 +15,7 @@ var maxright = -100.0
 func init(Left, Right):
 	maxleft = Left.x
 	maxright = Right.x
-	print("hi")
+	#print("hi")
 
 
 func _ready():
@@ -29,7 +29,7 @@ func _ready():
 	position.y = 0
 	position.x = round(rand_range(maxleft, maxright))
 	set_pos(position)
-	print("hark I am shine i have arrived")
+	#print("hark I am shine i have arrived")
 	set_process(true)
 
 func _process(delta):
