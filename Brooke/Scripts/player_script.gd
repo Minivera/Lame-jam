@@ -9,14 +9,16 @@ var turnspeed = 0.15
 const side_speed = 100
 var scroll_speed
 var last_trail_segment
-var grungyFilthCounter = 0
+var grungyFilthTimer = null
 var mySprite
 var input_timer = null
 var segment_timer = null
 var speed_adjust_ready = true
 var segment_drop_ready = true
+var decay_ready = true
 var sun_frame
 var pos = get_pos()
+var dead = false
 func _ready():
 	#size = get_texture().get_size()
 	set_process(true)
@@ -28,8 +30,13 @@ func _ready():
 	segment_timer.set_wait_time( 0.1 )
 	segment_timer.connect("timeout", self, "_on_segment_timer_timeout")
 	add_child(segment_timer)
-
+	grungyFilthTimer = Timer.new()
+	grungyFilthTimer.set_wait_time(1)
+	grungyFilthTimer.connect("timeout", self, "_on_grungyFilthTimer_timeout")
+	add_child(grungyFilthTimer)
 	
+func _on_grungyFilthTimer_timeout():
+	decay_ready = true
 func _on_input_timer_timeout():
 	speed_adjust_ready = true
 
@@ -38,6 +45,7 @@ func _on_segment_timer_timeout():
 
 func _process(delta):
 
+		
 	pos += direction * side_speed  * delta
 	set_pos(pos)
 	sun_frame = ceil(get_node("/root/Game").shine_meter)
@@ -68,7 +76,20 @@ func _process(delta):
 		get_parent().add_child(mySprite)
 		segment_drop_ready = false
 		segment_timer.start()
+	if(dead):
+		segment_drop_ready = false
+		speed_adjust_ready = false
+		get_node("/root/Game").scroll_speed = 0
+		if(sunframe >0 and decay_ready):
+			sunframe -= 1
+			grungyFilthTimer.start
+			decay_ready = false
+		else:
+			pass
+			#delete player sprite 
+	else:
+		scroll_speed = sqrt(abs(100.0*100.0 - (abs(direction.x) * 100.0 - 10) * (abs(direction.x) * 100.0 - 10)))
+		get_node("/root/Game").scroll_speed = scroll_speed
 	
-	scroll_speed = sqrt(abs(100.0*100.0 - (abs(direction.x) * 100.0 - 10) * (abs(direction.x) * 100.0 - 10)))
-	get_node("/root/Game").scroll_speed = scroll_speed
+
 	
