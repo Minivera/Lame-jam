@@ -50,6 +50,7 @@ func _process(delta):
 	if(sun_frame > 10):
 		sun_frame = 10
 	set_frame(sun_frame)
+	dead=true
 	
 	if(Input.is_action_pressed("turn_right") and not direction.x > 0.8 and speed_adjust_ready):
 		direction.x += turnspeed

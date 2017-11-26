@@ -16,7 +16,7 @@ var playShineSound = false
 func _ready():
 	set_process(true)
 	timer = Timer.new()
-	timer.set_wait_time( 2 )
+	timer.set_wait_time(10)
 	timer.connect("timeout", self, "_on_timer_timeout")
 	add_child(timer)
 
