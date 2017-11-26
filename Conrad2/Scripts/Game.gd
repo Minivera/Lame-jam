@@ -35,4 +35,5 @@ func _process(delta):
 		ready = false
 		timer.start()
 	if (playShineSound):
+		playShineSound = false
 		get_node("SamplePlayer").play("ding")
