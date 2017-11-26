@@ -70,6 +70,8 @@ animation = "default"
 
 [node name="Shine2" parent="." instance=ExtResource( 18 )]
 
+transform/pos = Vector2( 497.494, 373.793 )
+
 [node name="Sprite 2" type="Sprite" parent="."]
 
 transform/pos = Vector2( 734.394, 83.9977 )

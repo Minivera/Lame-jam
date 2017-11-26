@@ -10,21 +10,22 @@ var scroll_speed
 
 
 func init():
-	var viewport = get_viewport().get_rect().size
-	var viewWidth = viewport[0]
-	var viewHeight = viewport[1]
-	var position = get_pos()
-	print("hark I am shine i have arrived")
-	position.y = 0
-	position.x = round(rand_range(0.0, viewWidth))
-	set_pos(position)
+	print("hi")
 
 
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	#size = get_texture().get_size()
-    set_process(true)
+	var viewport = get_viewport().get_rect().size
+	var viewWidth = viewport[0]
+	var viewHeight = viewport[1]
+	var position = get_pos()
+	#print("hark I am shine i have arrived")
+	position.y = 0
+	position.x = round(rand_range(0.0, viewWidth))
+	set_pos(position)
+	set_process(true)
 
 func _process(delta):
 	scroll_speed = get_node("/root/Game").scroll_speed
