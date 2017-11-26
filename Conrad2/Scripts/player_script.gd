@@ -43,9 +43,7 @@ func _on_input_timer_timeout():
 func _on_segment_timer_timeout():
 	segment_drop_ready = true
 
-func _process(delta):
-
-		
+func _process(delta):	
 	pos += direction * side_speed  * delta
 	set_pos(pos)
 	sun_frame = ceil(get_node("/root/Game").shine_meter)

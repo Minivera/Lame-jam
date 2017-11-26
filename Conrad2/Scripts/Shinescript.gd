@@ -37,6 +37,9 @@ func _process(delta):
 	var pos = get_pos()
 	pos += direction * scroll_speed * delta
 	set_pos(pos)
+	if (false):
+		get_node("/root/Game").playShineSound = true
+
 
 
 

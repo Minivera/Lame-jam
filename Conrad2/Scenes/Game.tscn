@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=1]
+[gd_scene load_steps=27 format=1]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/cave_tiles.tres" type="TileSet" id=2]
@@ -19,7 +19,8 @@
 [ext_resource path="res://Sprites/eclectic-fabric.jpg" type="Texture" id=17]
 [ext_resource path="res://Scripts/ground_script.gd" type="Script" id=18]
 [ext_resource path="res://Sounds/FlowerGarden.ogg" type="AudioStream" id=19]
-[ext_resource path="res://Sounds/smack.wav" type="Sample" id=20]
+[ext_resource path="res://Sounds/ding.wav" type="Sample" id=20]
+[ext_resource path="res://Sounds/smack.wav" type="Sample" id=21]
 
 [sub_resource type="GDScript" id=1]
 
@@ -87,11 +88,17 @@ animations = [ {
 
 [sub_resource type="SampleLibrary" id=5]
 
-samples/smack = {
+samples/ding = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 20 )
+}
+samples/smack = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 21 )
 }
 
 [node name="Game" type="Node"]

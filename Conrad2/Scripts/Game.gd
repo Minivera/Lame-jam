@@ -9,6 +9,7 @@ var total_scroll = 0
 var LeftPath = Vector2(-100.0, 0)
 var RightPath = Vector2(-100.0, 0)
 var smacked = false
+var playShineSound = false
 
 
 
@@ -33,3 +34,5 @@ func _process(delta):
 		add_child(mySprite)
 		ready = false
 		timer.start()
+	if (playShineSound):
+		get_node("SamplePlayer").play("ding")
