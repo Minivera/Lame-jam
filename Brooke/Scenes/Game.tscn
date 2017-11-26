@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=1]
+[gd_scene load_steps=25 format=1]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/cave_tiles.tres" type="TileSet" id=2]
@@ -84,6 +84,11 @@ animations = [ {
 "speed": 0.0
 } ]
 
+[sub_resource type="CircleShape2D" id=5]
+
+custom_solver_bias = 0.0
+radius = 10.0
+
 [node name="Game" type="Node"]
 
 script/script = ExtResource( 1 )
@@ -140,10 +145,30 @@ frames = SubResource( 4 )
 animation = "default"
 script/script = ExtResource( 16 )
 
+[node name="Area2D" type="Area2D" parent="CanvasLayer/Player"]
+
+transform/pos = Vector2( -496.399, -312.465 )
+input/pickable = true
+shapes/0/shape = SubResource( 5 )
+shapes/0/transform = Matrix32( 1.28653, 0, 0, 1.25267, 496.647, 312.064 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Player/Area2D"]
+
+transform/pos = Vector2( 496.647, 312.064 )
+transform/scale = Vector2( 1.28653, 1.25267 )
+shape = SubResource( 5 )
+trigger = false
+_update_shape_index = 0
+
 [node name="Ground" type="Sprite" parent="."]
 
-transform/pos = Vector2( 509.612, 551.686 )
-transform/scale = Vector2( 2.25437, 1 )
+transform/pos = Vector2( 515.642, 677.837 )
+transform/scale = Vector2( 2.28093, 1.55573 )
 texture = ExtResource( 17 )
 script/script = ExtResource( 18 )
 
