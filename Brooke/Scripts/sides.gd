@@ -79,7 +79,7 @@ func _process(delta):
 	get_node("/root/Game").total_scroll += delta 
 	the_delta = delta
 	if (currentLean["left"] >= abs(direction["left"]) or currentLean["right"] >= abs(direction["right"])):
-		print("rcalcul")
+		#print("rcalcul")
 		# Check if we are still going to the same side
 		if (timesSameSide == TIME_SAME_SIDE) :
 			timesSameSide = 0
@@ -105,8 +105,8 @@ func generate_middle_dot():
 	currentLean["right"] += abs(direction["right"] * SIDE_ACCELERATION)
 	var leftPos = max(LeftPath[0].x + direction["left"] * SIDE_ACCELERATION, rand_range(maxLeft, maxLeft - 40))
 	var rightPos = min(RightPath[0].x + direction["right"] * SIDE_ACCELERATION, rand_range(maxRight, maxRight - 40))
-	print(rightPos - leftPos)
-	print(MIN_DISTANCE)
+	#print(rightPos - leftPos)
+	#print(MIN_DISTANCE)
 	if (rightPos - leftPos <= MIN_DISTANCE):
 		leftPos = max(LeftPath[0].x + ((-direction["left"]) * SIDE_ACCELERATION), maxLeft)
 		rightPos = min(RightPath[0].x + ((-direction["right"]) * SIDE_ACCELERATION), maxRight)
