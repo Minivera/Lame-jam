@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=1]
+[gd_scene load_steps=23 format=1]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/cave_textures.tres" type="TileSet" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Sprites/FlowerBase10.png" type="Texture" id=15]
 [ext_resource path="res://Scripts/player_script.gd" type="Script" id=16]
 [ext_resource path="res://Scenes/Shine2.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Sounds/FlowerGarden.ogg" type="AudioStream" id=18]
 
 [sub_resource type="GDScript" id=1]
 
@@ -139,5 +140,16 @@ animation = "default"
 script/script = ExtResource( 16 )
 
 [node name="Shine2" parent="." instance=ExtResource( 17 )]
+
+[node name="StreamPlayer" type="StreamPlayer" parent="."]
+
+stream/stream = ExtResource( 18 )
+stream/play = false
+stream/loop = false
+stream/volume_db = 0.2
+stream/autoplay = true
+stream/paused = false
+stream/loop_restart_time = 0.0
+stream/buffering_ms = 500
 
 
